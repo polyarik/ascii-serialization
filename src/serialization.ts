@@ -1,8 +1,8 @@
 const MAX_LENGTH = 1000;
 const RANGE = 300;
 
-const ASCII_FROM = 32;
-const ASCII_TO = 127; // only printable ASCII characters (32 - 127), 96 in total
+export const ASCII_FROM = 32;
+export const ASCII_TO = 127; // only printable ASCII characters (32 - 127), 96 in total
 
 const bitsForCounts = Math.ceil(Math.log2(MAX_LENGTH));
 const bitsForNums = Math.ceil(Math.log2(RANGE));
