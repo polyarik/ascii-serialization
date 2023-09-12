@@ -2,7 +2,7 @@ const MAX_LENGTH = 1000;
 const RANGE = 300;
 
 const ASCII_FROM = 32;
-const ASCII_TO = 126; // only printable ASCII characters (32 - 126), 95 in total
+const ASCII_TO = 127; // only printable ASCII characters (32 - 127), 96 in total
 
 const bitsForCounts = Math.ceil(Math.log2(MAX_LENGTH));
 const bitsForNums = Math.ceil(Math.log2(RANGE));
@@ -44,7 +44,7 @@ export function deserialize(base128: string) {
     let count = 0;
 
     for (let i = 0; i < bitsForCounts; i++) {
-      if (bits & BigInt(1 << (i + bitsForNums))) count += Math.pow(2, i);
+      if (bits & BigInt(1 << (i + bitsForNums))) count += 2 ** i;
     }
 
     for (let i = 0; i < count; i++) {
@@ -59,7 +59,7 @@ export function deserialize(base128: string) {
 
 function convertToASCII(num: bigint) {
   let str = "";
-  const base = BigInt(ASCII_TO - ASCII_FROM);
+  const base = BigInt(ASCII_TO - ASCII_FROM + 1);
 
   while (num > 0n) {
     const remainder = num % base;
@@ -72,12 +72,14 @@ function convertToASCII(num: bigint) {
 
 function convertFromASCII(str: string) {
   let num = 0n;
-  const base = ASCII_TO - ASCII_FROM;
+  const base = BigInt(ASCII_TO - ASCII_FROM + 1);
 
   for (let i = 0; i < str.length; i++) {
     const digit =
-      (str.charCodeAt(i) - ASCII_FROM) * Math.pow(base, str.length - 1 - i);
-    num += BigInt(digit);
+      BigInt(str.charCodeAt(i) - ASCII_FROM) *
+      base ** BigInt(str.length - 1 - i);
+
+    num += digit;
   }
 
   return num;
