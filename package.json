@@ -1,0 +1,15 @@
+{
+  "name": "seriliazation-test_task",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "compile": "bun build src/index.ts --outdir dist"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
