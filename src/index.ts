@@ -1,11 +1,18 @@
-import { serialize, deserialize } from "./seriliazation";
-import { simpleSerialize, simpleDeserialize } from "./simple-seriliazation";
+import { serialize, deserialize } from "./serialization";
 
-const arr = [1, 1, 1, 2, 1, 300, 298, 15, 127, 29, 29, 65, 29, 29, 29, 17];
-console.log(`initial:${arr}:`);
+console.log("Serialization example:");
+
+const arr = [55, 73, 55, 73, 55, 73, 55, 73, 1, 1, 1, 1, 1, 1, 1];
+console.log(`  initial:${arr}:`);
 
 const str = serialize(arr);
-console.log(`compressed:${str}:`);
+const str2 = JSON.stringify(arr);
+
+const compressionRate = ((str.length / str2.length) * 100).toFixed(2);
+console.log(`  compressed:${str}: (ASCII table range from 32 to 126)`);
+console.log(`    compression rate = ${compressionRate}%`);
 
 const result = deserialize(str);
-console.log(`decompressed:${arr}:`);
+console.log(`  decompressed:${result}:`);
+
+console.log('\nHey! Use "bun test" to run all tests :>');
