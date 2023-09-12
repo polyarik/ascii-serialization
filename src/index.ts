@@ -1,4 +1,3 @@
-import { serialize, deserialize } from "./serialization";
 import { testSerialization } from "./serialization.tester";
 
 console.log("Serialization example:");
