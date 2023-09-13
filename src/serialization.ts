@@ -30,9 +30,9 @@ export function serialize(nums: number[]) {
   return convertToASCII(bits);
 }
 
-export function deserialize(base128: string) {
+export function deserialize(str: string) {
   const arr: number[] = [];
-  let bits = convertFromASCII(base128);
+  let bits = convertFromASCII(str);
 
   while (bits) {
     let num = 0;

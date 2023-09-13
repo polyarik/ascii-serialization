@@ -36,7 +36,7 @@ describe("serialize()", () => {
   for (const caseName in cases) {
     test(caseName, () => {
       const arr = cases[caseName];
-      const isCorrect = testSerialization(arr, false);
+      const isCorrect = testSerialization(arr);
       expect(isCorrect).toBeTrue();
     });
   }
